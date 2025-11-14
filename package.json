@@ -1,0 +1,26 @@
+{
+  "name": "pokeapp",
+  "version": "1.0.0",
+  "description": "Pokedex",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "qa": "cross-env NODE_ENV=qa nodemon app.js",
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oliver Tejeda",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3",
+    "mysql2": "^3.15.3",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
+  }
+}

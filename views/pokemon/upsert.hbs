@@ -1,0 +1,67 @@
+{{#if error}}
+<div class="row">
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <i class="bi bi-exclamation-octagon"></i> {{error}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</div>
+{{/if}}
+<div class="row d-flex justify-content-center">
+  <div class="col-12 col-sm-5">
+    <div class="card">
+      <div class="card-header bg-primary text-light text-center">
+        <i class="bi bi-credit-card-2-front"></i>{{#if editMode}} Update pokemon {{pokemon.name}} {{else}} Add
+        new pokemon {{/if}}
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/pokemon/{{#if editMode}}update{{else}}add{{/if}}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" value="{{#if editMode}}{{pokemon.name}}{{/if}}" class="form-control" id="name"
+              name="Name" required="required" />
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Photo Url:</label>
+            <input type="text" class="form-control" id="image" name="pokemonImage"
+              required="required" value="{{#if editMode}}{{pokemon.photoUrl}}{{/if}}" />
+          </div>
+          <div class="mb-3">
+            <label for="region" class="form-label">Region:</label>
+            <select class="form-select" name="region" id="region" required>
+              <option value="">Select a region:</option>
+              {{#each regions}}
+              <option value="{{this.id}}" {{IsSelected ../pokemon.Region.name this.name ../editMode}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="firstType" class="form-label">First Type:</label>
+            <select class="form-select" name="firstType" id="firstType" required>
+              <option value="">Select a type:</option>
+              {{#each types}}
+              <option value="{{this.id}}" {{IsSelected ../firstType this.name ../editMode}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="secondType" class="form-label">Second Type:</label>
+            <select class="form-select" name="secondType" id="secondType" required>
+              <option value="">Select a type:</option>
+              {{#each types}}
+              <option value="{{this.id}}" {{IsSelected ../secondType this.name ../editMode}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+
+          {{#if editMode}}
+          <input type="hidden" name="pokemonID" value="{{pokemon.id}}" />
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end"><i class="bi bi-floppy"></i> Save</button>
+          <a href="/pokemon/index" class="btn btn-warning float-end me-2"><i class="bi bi-arrow-left"></i> Back to
+            list</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

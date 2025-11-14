@@ -1,0 +1,27 @@
+<div class="row d-flex justify-content-center">
+  <div class="col-12 col-sm-5">
+    <div class="card">
+      <div class="card-header bg-primary text-light text-center">
+        <h5 class=""><i class="bi bi-credit-card-2-front"></i>{{#if editMode}} Update Type {{type.name}} {{else}} Add
+        Type {{/if}}</h5>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/type/{{#if editMode}}update{{else}}add{{/if}}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" value="{{#if editMode}}{{type.name}}{{/if}}" class="form-control" id="name"
+              name="Name" required="required" />
+          </div>
+
+          {{#if editMode}}
+          <input type="hidden" name="typeID" value="{{type.id}}" />
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end"><i class="bi bi-floppy"></i> Save</button>
+          <a href="/type/index" class="btn btn-warning float-end me-2"><i class="bi bi-arrow-left"></i> Back to
+            list</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

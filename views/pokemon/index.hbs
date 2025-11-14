@@ -1,0 +1,67 @@
+<div class="row">
+  <h1 class="text-center">Pokemons</h1>
+</div>
+
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-4">
+    <a href="/pokemon/add" class="btn btn-success"><i
+        class="bi bi-bookmark-plus"
+      ></i>
+      New Pokemon</a>
+  </div>
+</div>
+
+{{#if hasPokemon}}
+
+  <div class="row">
+      {{#each pokemonList}}
+    <div class="col-12 col-sm-3">
+        <div class="card">
+          <img
+            src="{{this.photoUrl}}"
+            class="card-img-top "
+            alt="{{this.name}}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Nombre: {{this.name}}</h5>
+            <p class="card-text mb-1">Region: {{this.Region.name}}</p>
+            <p class="card-text">Tipos: {{ShowTypes this.Types}}</p>
+            <div class="mt-2">
+              <a
+                href="/pokemon/update/{{this.id}}"
+                class="btn btn-success btn-sm float-end"
+              ><i class="bi bi-pencil"></i>
+                Update</a>
+                <a
+                  class="btn btn-danger btn-sm fw-semibold float-end me-1"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete-modal"
+                  id="btn-delete"
+                  data-id="{{this.id}}"
+                >Delete</a>
+            </div>
+          </div>
+        </div>
+    </div>
+      {{/each}}
+
+  </div>
+
+{{else}}
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-4">
+      <div class="alert alert-info" role="alert">
+        <i class="bi bi-info-circle"></i>
+        You have no pokemons registered.
+      </div>
+    </div>
+  </div>
+
+{{/if}}
+
+{{> modal title="Pokemon" routeName="pokemon"}}
+
+{{#section "scripts"}}
+  <script src="/assets/js/site/index.js"></script>
+{{/section}}

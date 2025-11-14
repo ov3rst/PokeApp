@@ -1,0 +1,171 @@
+<div class="row">
+  <h1 class="text-center">Bienvenidos al home</h1>
+</div>
+
+<div class="row">
+  <div class="col-12 d-flex gap-2">
+    <div><h3>Filtrar por:</h3></div>
+    <div>
+      <p class="d-inline-flex gap-1">
+        <button
+          class="btn btn-primary fw-semibold"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#types"
+          aria-expanded="false"
+          aria-controls="types"
+        >
+          Abrir Filtros
+        </button>
+      </p>
+      <div class="collapse" id="types">
+        <div class="card p-3 mb-3" style="width: 250px;">
+          <form
+            action="/filter"
+            method="get"
+            id="filter-form"
+            class="d-flex gap-2"
+          >
+            <div>
+              <h6 class="mb-2">Tipos</h6>
+              <div
+                class="border rounded p-2"
+                style="max-height: 200px; overflow-y: auto;"
+              >
+                {{#each types}}
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="types"
+                      value="{{this.id}}"
+                      id="{{this.id}}"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="{{this.id}}"
+                    >{{this.name}}</label>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+            <div class="flex-grow-1">
+              <h6 class="mb-2">Regiones</h6>
+              <div
+                class="border rounded p-2"
+                style="max-height: 200px; overflow-y: auto;"
+              >
+                {{#each regions}}
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="regions"
+                      value="{{this.id}}"
+                      id="{{this.id}}"
+                    />
+                    <label
+                      class="form-check-label"
+                      for="{{this.id}}"
+                    >{{this.name}}</label>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </form>
+          <button
+            class="btn btn-primary mt-3 w-100"
+            form="filter-form"
+          >Filtrar</button>
+        </div>
+      </div>
+    </div>
+    {{!-- <div>
+      <p class="d-inline-flex gap-1">
+        <button
+          class="btn btn-primary"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#regions"
+          aria-expanded="false"
+          aria-controls="regions"
+        >
+          Regiones
+        </button>
+      </p>
+      <div class="collapse" id="regions">
+        <div class="card p-3 mb-3" style="width: 250px;">
+          <h6 class="mb-2">Regiones</h6>
+
+          <div
+            class="border rounded p-2"
+            style="max-height: 200px; overflow-y: auto;"
+          >
+            <form
+              action="/region/filter"
+              method="post"
+              id="region-form"
+              class="m-0"
+            >
+              {{#each regions}}
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="{{this.id}}"
+                    id="{{this.id}}"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="{{this.id}}"
+                  >{{this.name}}</label>
+                </div>
+              {{/each}}
+            </form>
+          </div>
+
+          <button
+            class="btn btn-primary mt-3 w-100"
+            form="region-form"
+          >Filtrar</button>
+        </div>
+      </div>
+    </div> --}}
+  </div>
+</div>
+
+{{! Pokemons card }}
+{{#if hasPokemon}}
+
+  <div class="row">
+    {{#each pokemonList}}
+      <div class="col-12 col-sm-3">
+        <div class="card">
+          <img
+            src="{{this.photoUrl}}"
+            class="card-img-top"
+            alt="{{this.name}}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Nombre: {{this.name}}</h5>
+            <p class="card-text mb-1">Region: {{this.Region.name}}</p>
+            <p class="card-text">Tipos: {{ShowTypes this.Types}}</p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+
+{{else}}
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-4">
+      <div class="alert alert-info" role="alert">
+        <i class="bi bi-info-circle"></i>
+        You have no pokemons registered.
+      </div>
+    </div>
+  </div>
+
+{{/if}}

@@ -1,0 +1,68 @@
+<div class="row">
+  <h1 class="text-center">Types</h1>
+</div>
+
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-4">
+    <a href="/type/add" class="btn btn-success"><i
+        class="bi bi-bookmark-plus"
+      ></i>
+      New Type</a>
+  </div>
+</div>
+
+{{#if hasType}}
+
+  <div class="row">
+
+    <div class="col-12 col-sm-3">
+      <table class="table table-dark table-striped align-middle text-white-50">
+        <thead>
+          <tr>
+            <th class="text-white-50" scope="col">Name</th>
+            <th class="text-white-50" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider fw-semibold text-white-50">
+          {{#each typeList}}
+            <tr>
+              <td class="text-white-50">{{this.name}}</td>
+              <td class="text-white-50">
+                <a
+                  href="/type/update/{{this.id}}"
+                  class="btn btn-outline-warning btn-sm fw-semibold me-1"
+                ><i class="bi bi-pencil"></i> Update</a>
+                <a
+                  class="btn btn-outline-danger btn-sm fw-semibold"
+                  data-bs-toggle="modal"
+                  data-bs-target="#delete-modal"
+                  id="btn-delete"
+                  data-id="{{this.id}}"
+                >Delete</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{{else}}
+
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-sm-4">
+      <div class="alert alert-info" role="alert">
+        <i class="bi bi-info-circle"></i>
+        You have no types registered.
+      </div>
+    </div>
+  </div>
+
+{{/if}}
+
+{{!-- Partial --}}
+{{> modal title="Type" routeName="type"}}
+
+{{#section "scripts"}}
+  <script src="/assets/js/site/index.js"></script>
+{{/section}}
